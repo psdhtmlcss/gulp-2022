@@ -1,24 +1,26 @@
 const { src, dest } = require('gulp');
 
+// Конфигурация
+const path = require('../config/path.js');
+const app = require('../config/app.js');
+
+// Плагины
 const fileInclude = require('gulp-file-include');
 const htmlmin = require('gulp-htmlmin');
 const size = require('gulp-size');
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
 
-// Обработка HTML
 const html = () => {
-  return src('./src/html/*.html')
+  return src(path.html.src)
     .pipe(plumber({
       errorHandler: notify.onError()
     }))
     .pipe(fileInclude())
     .pipe(size({ title: 'size before' }))
-    .pipe(htmlmin({
-      collapseWhitespace: true
-    }))
+    .pipe(htmlmin(app.htmlmin))
     .pipe(size({ title: 'size after' }))
-    .pipe(dest('./public'))
+    .pipe(dest(path.html.dest))
 };
 
 module.exports = html;

@@ -1,6 +1,9 @@
 const { watch, series, parallel } = require('gulp');
 const browserSync = require('browser-sync').create();
 
+// Конфигурация
+const path = require('./config/path.js');
+
 // Задачи
 const clear = require('./task/clear.js');
 const pug = require('./task/pug.js');
@@ -9,14 +12,14 @@ const pug = require('./task/pug.js');
 const server = () => {
   browserSync.init({
     server: {
-      baseDir: './public'
+      baseDir: path.root
     }
   });
 };
 
 // Наблюдение
 const watcher = () => {
-  watch('./src/pug/**/*.pug', pug).on('all', browserSync.reload);
+  watch(path.pug.src, pug).on('all', browserSync.reload);
 };
 
 exports.pug = pug;
