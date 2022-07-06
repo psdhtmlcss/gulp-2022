@@ -1,0 +1,9 @@
+.news {
+  color: red;
+}
+
+@media screen and (max-width: 780px) {
+  .news {
+    color: white;
+  }
+}

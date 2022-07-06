@@ -12,7 +12,11 @@ const notify = require('gulp-notify');
 const pug = () => {
   return src(path.pug.src)
     .pipe(plumber({
-      errorHandler: notify.onError()
+      errorHandler: notify.onError(error => ({
+        title: 'PUG',
+        message: error.message
+        
+      }))
     }))
     .pipe(pugs(app.pug))
     .pipe(dest(path.pug.dest))
