@@ -1,0 +1,9 @@
+.news {
+  color: red;
+
+  @include ph {
+    .news {
+    color: white;
+  }
+  }
+}

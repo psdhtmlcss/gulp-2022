@@ -1,0 +1,27 @@
+$base-font-size: 22px;
+
+@mixin ph {
+  @media screen and (max-width: 780px) {
+    @content;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  font-size: $base-font-size;
+
+  @include ph {
+    color: white;
+    background-color: black;
+  }
+}
+
+// @import "blocks/title.scss";
+// @import "blocks/news.scss";
+
+// Sass Glob
+@import "blocks/*.scss";
