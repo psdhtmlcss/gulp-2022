@@ -2,6 +2,7 @@ const { src, dest } = require('gulp');
 
 // Конфигурация
 const path = require('../config/path.js');
+const app = require('../config/app.js');
 
 // Плагины
 const plumber = require('gulp-plumber');
@@ -16,7 +17,7 @@ const shorthand = require('gulp-shorthand');
 const groupCssMediaQueries = require('gulp-group-css-media-queries');
 
 const css = () => {
-  return src(path.css.src, { sourcemaps: true })
+  return src(path.css.src, { sourcemaps: app.isDev })
     .pipe(plumber({
       errorHandler: notify.onError(error => ({
         title: 'CSS',
@@ -29,11 +30,11 @@ const css = () => {
     .pipe(shorthand())
     .pipe(groupCssMediaQueries())
     .pipe(size({ title: 'main.css' }))
-    .pipe(dest(path.css.dest, { sourcemaps: true }))
+    .pipe(dest(path.css.dest, { sourcemaps: app.isDev }))
     .pipe(rename({ suffix: '.min' }))
     .pipe(csso())
     .pipe(size({ title: 'main.min.css' }))
-    .pipe(dest(path.css.dest, { sourcemaps: true }))
+    .pipe(dest(path.css.dest, { sourcemaps: app.isDev }))
 };
 
 module.exports = css;
